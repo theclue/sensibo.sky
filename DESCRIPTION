@@ -2,7 +2,7 @@ Package: sensibo.sky
 Title: Access to Sensibo Sky API V2 for Air Conditioners Remote Control
 Version: 1.0.0
 Authors@R: person("Gabriele", "Baldassarre", role = c("aut", "cre"), email = "gabriele@gabrielebaldassarre.com")
-Description: Provides an interface to the Sensibo Sky API user to remotely control non-smart Air Conditioning units
+Description: Provides an interface to the Sensibo Sky API user to remotely control non-smart Air Conditioning units.
   See <https://sensibo.com> for more informations.
 URL: https://github.com/theclue/sensibo.sky
 BugReports: https://github.com/theclue/sensibo.sky/issues

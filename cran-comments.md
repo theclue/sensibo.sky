@@ -1,3 +1,25 @@
+# Round 2 (Resubmission)
+
+Martina Schmirl <martina.schmirl@jku.at>:
+
+Thanks,
+
+Please always write package names, software names and API names in 
+single quotes in title and description.
+
+Please only capitalize sentence beginnings and names in the description 
+text. --> ".. air conditioning units see ..."
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl
+
+* **Added the single quotes in DESCRIPTION file (title and description)**
+* **Fixed wrong uppercase in DESCRIPTION file (description)**
+
+# Round 1 (First submission)
+
 ## Test environments
 * local OS X install, R 3.6.0
 * Ubuntu Linux 16.04 LTS, R-release, GCC (R-hub)

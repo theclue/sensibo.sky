@@ -18,7 +18,7 @@
 #' }
 sensibo.pods <- function(key = getOption("sensibo.key")) {
    url <- file.path(base_url(), "users/me/pods")
-   pods <- xGET(url, query=glue::glue("apiKey={key}"))
+   pods <- xGET(url, query=glue::glue("fields=*&apiKey={key}"))
    do.call(c, lapply(pods, function(pod){pod$id}))
 }
 
@@ -47,7 +47,7 @@ sensibo.pods <- function(key = getOption("sensibo.key")) {
 sensibo.pod.info <- function(pod, key = getOption("sensibo.key")) {
    if(length(pod)>1) stop("You must specify only one pod id here.")
    url <- file.path(base_url(), glue::glue("pods/{pod}"))
-   xGET(url, query=glue::glue("apiKey={key}"))
+   xGET(url, query=glue::glue("fields=*&apiKey={key}"))
 }
 
 #' 
@@ -78,7 +78,7 @@ sensibo.pod.states <- function(pod, n = 10, key = getOption("sensibo.key")) {
    if(is.null(n)) n <- 10
    if(n > 20) n <- 20
    url <- file.path(base_url(), glue::glue("pods/{pod}/acStates"))
-   states <- xGET(url, query=glue::glue("limit={n}&apiKey={key}"))
+   states <- xGET(url, query=glue::glue("limit={n}&fields=*&apiKey={key}"))
    return(states)
 }
 

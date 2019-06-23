@@ -3,8 +3,9 @@
 #' Gets a list of the air conditioners (pods) IDs of the authenticated user.
 #' 
 #' @export
+#' @param fields (character) Comma-separated list of fields to add to the output
 #' @param key (character) API key from https://home.sensibo.com/me/api.
-#' @return A character vectors with available pods unique IDs.
+#' @return A data frame with a list of the available pods with the requested fields.
 #' 
 #' @examples \dontrun{
 #' # Assuming that a valid Sensibo Sky API Key was created on https://home.sensibo.com/me/api
@@ -16,10 +17,12 @@
 #' pods.id <- sensibo.pods()
 #' 
 #' }
-sensibo.pods <- function(key = getOption("sensibo.key")) {
+sensibo.pods <- function(fields = "id,room,location", key = getOption("sensibo.key")) {
    url <- file.path(base_url(), "users/me/pods")
-   pods <- xGET(url, query=glue::glue("fields=*&apiKey={key}"))
-   do.call(c, lapply(pods, function(pod){pod$id}))
+   pods <- xGET(url, query=glue::glue("fields={fields}&apiKey={key}"))
+   #as.data.frame(data.table::rbindlist(pods, idcol = TRUE)) 
+   #as.data.frame(pods, stringsAsFactors = FALSE)
+   #do.call(c, lapply(pods, function(pod){pod$id}))
 }
 
 #' 
@@ -111,7 +114,7 @@ sensibo.pod.state <- function(pod, state, key = getOption("sensibo.key")) {
    if(length(pod)>1) stop("You must specify only one pod id here.")
    if(length(state)>1) stop("You must specify only one state id here.")
    url <- file.path(base_url(), glue::glue("pods/{pod}/acStates/{state}"))
-   probe.list <- xGET(url, query=glue::glue("apiKey={key}"))
+   probe.list <- xGET(url, query=glue::glue("fields=*&apiKey={key}"))
    return(probe.list)
 }
 
@@ -140,7 +143,7 @@ sensibo.pod.state <- function(pod, state, key = getOption("sensibo.key")) {
 sensibo.pod.probe <- function(pod, key = getOption("sensibo.key")) {
    if(length(pod)>1) stop("You must specify only one pod id here.")
    url <- file.path(base_url(), glue::glue("pods/{pod}/measurements"))
-   xGET(url, query=glue::glue("apiKey={key}"))
+   xGET(url, query=glue::glue("fields=*&apiKey={key}"))
 }
 
 #' 
